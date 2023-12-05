@@ -7,8 +7,7 @@ def _create_llama_model(model_path, embedding=False):
     params = llamacpp.LlamaContextParams()
     params.seed = -1
     params.embedding = embedding
-    model = llamacpp.LlamaContext(model_path, params)
-    return model
+    return llamacpp.LlamaContext(model_path, params)
 
 
 def _eval_token(model, tokens, n_past, n_batch, n_thread):
@@ -49,7 +48,7 @@ class LlamaCppCompletion:
         result = ""
         token = prompt_tokens[-1]
         finish_reason = "length"
-        for i in range(max_tokens):
+        for _ in range(max_tokens):
             self.model.eval(array.array("i", [token]), 1, n_past, self.n_thread)
 
             token = self.model.sample_top_p_top_k(

@@ -12,5 +12,5 @@ def get_timestamp():
 
 
 def unpack_cfloat_array(mem):
-    l = int(len(mem) / 4)
+    l = len(mem) // 4
     return unpack(f"{l}f", mem)
