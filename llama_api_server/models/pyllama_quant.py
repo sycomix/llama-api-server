@@ -95,7 +95,7 @@ class PyLlamaQuant:
         if len(embeds) == 1:
             embeds = embeds[0]
 
-        c_prompt_tokens = sum([len(i) for i in input_ids])
+        c_prompt_tokens = sum(len(i) for i in input_ids)
         return {
             "object": "list",
             "data": [{"object": "embedding", "embedding": embeds, "index": 0}],
